@@ -46,3 +46,45 @@ sum1=(dolphin+github)/2;
 sum2=(dolphin/2)+(github/2);
 imshow(sum1);
 imshow(sum2);
+
+%Multiply by a scalar
+imshow(dolphin*0.5);
+imshow(dolphin*1.5);
+imshow(dolphin*2);
+
+%Blend two images
+%make the sum as two to retain the intensity
+blended_img=dolphin*0.85+github*0.15
+
+%function to blend two images
+function output=blend(a,b,alpha)
+  output=alpha*a+(1-alpha)*b;
+endfunction
+result=blend(dolphin,github,0.85);
+imshow(result);
+
+%adding noise to an image
+%randn is function which generates noise with mean=0 and standard deviation=1
+%sigma is the scaling factor. multiplying with sigma makes the standard deviation as sigma
+noise=randn(size(dolphin))*sigma;
+result=dolphin+noise;
+
+%Difference of two images
+%order matters
+%brighter areas indicate where the two images differ more
+result=dolphin-github;
+result1=github-dolphin;
+
+%absolute difference between two images
+%makes no difference since subtraction is performed first -> loose out negative values
+result=abs(dolphin-github);
+
+%To preserve image difference
+%dolphin-github=0 when value of github>value of dolphin. and vice versa
+%or convert to floating point value(it can represent negative numbers)
+result=(dolphin-github)+(github-dolphin)
+%or use the imabsdiff function from the image package
+%the order doesnt matter
+pkg load image;
+abs_diff=imabsdiff(dolphin,github);
+imshow(abs_diff);
