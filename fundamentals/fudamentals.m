@@ -33,3 +33,16 @@ img_green=img(:,:,2);
 
 %to display the blue channel
 img_blue=img(:,:,3);
+
+%addition of two images
+%images must have same dimensions
+dolphin=imread('dolphin.jpg');
+github=imread('github.jpg');
+summed=dolphin+github;
+imshow(summed);
+
+%add images by taking average of control the intensity
+sum1=(dolphin+github)/2;
+sum2=(dolphin/2)+(github/2);
+imshow(sum1);
+imshow(sum2);
