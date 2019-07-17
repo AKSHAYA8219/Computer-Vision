@@ -3,6 +3,7 @@ img=imread('fruits.jpg');
 
 %load the image
 imshow(img);
+imshow(img,[low high]); %lower than low gives black and higher than high gives white 
 
 %display the size of the image
 disp(size(img));
@@ -63,12 +64,6 @@ endfunction
 result=blend(dolphin,github,0.85);
 imshow(result);
 
-%adding noise to an image
-%randn is function which generates noise with mean=0 and standard deviation=1
-%sigma is the scaling factor. multiplying with sigma makes the standard deviation as sigma
-noise=randn(size(dolphin))*sigma;
-result=dolphin+noise;
-
 %Difference of two images
 %order matters
 %brighter areas indicate where the two images differ more
@@ -88,3 +83,19 @@ result=(dolphin-github)+(github-dolphin)
 pkg load image;
 abs_diff=imabsdiff(dolphin,github);
 imshow(abs_diff);
+
+%Generate Gaussian noise
+%rand-generate radom number from a uniform distribution
+%randn-generate random number from a normal distribution
+%randi-generate random integers
+some_number=randn(); %generate a random number
+some_row_vector=randn([1 5]); %generate a row vector with 5 columns
+some_matrix=randn([2 3]); %generate a matrix of size 2X3
+%these random bunch of numbers are called noise
+%randn draws these numbers from a Gaussian or random normal distribution
+
+%adding noise to an image
+%randn is function which generates noise with mean=0 and standard deviation=1
+%sigma is the scaling factor. multiplying with sigma makes the standard deviation as sigma
+noise=randn(size(github))*sigma; % use diff range of values for sigma like 5,50,100 etc
+result=github+noise;
